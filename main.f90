@@ -1,14 +1,21 @@
 program main
   implicit none
-  integer :: n, nbase
-  real(8) :: vdc_res
+  integer :: n, nbase2, nbase3, nbase5
+  real(8) :: sec2, sec3, sec5
 
-  nbase = 3
+  nbase2 = 2
+  nbase3 = 3
+  nbase5 = 5
 
-  do n = 1,10
-     call vdCorput_sequence(n,nbase,vdc_res)
-     write(*,*)n,vdc_res
+  open(20,file="halton_sequence.out")
+  do n = 1,10000
+     call vdCorput_sequence(n,nbase2,sec2)
+     call vdCorput_sequence(n,nbase3,sec3)
+     call vdCorput_sequence(n,nbase5,sec5)
+!     write(*,"(I7,2x,999e26.16e3)")n,sec2,sec3,sec5
+     write(20,"(I7,2x,999e26.16e3)")n,sec2,sec3,sec5
   end do
+  close(20)
   
 end program main
 !-----------------------------------------
